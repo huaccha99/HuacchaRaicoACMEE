@@ -1,0 +1,32 @@
+ContextMap AcmeEcommerceMap{
+    contains GestionOrdenesContext
+    contains GestionEnviosContext
+    contains GestionClientesContext
+    contains GestionPagosContext
+    contains GestionAutorizacionAutenticacionContext
+    contains CatalogoProductosContext
+
+    /* Cooperacion */
+    GestionClientesContext [P]<->[P] GestionEnviosContext
+    GestionOrdenesContext [P]<->[P] GestionClientesContext
+    GestionOrdenesContext [P]<->[P] GestionPagosContext
+    /*Conformista*/
+    GestionClientesContext [CF]<-[PL] GestionAutorizacionAutenticacionContext
+    /*Anti-corruption layer*/
+
+    /*Open Host service */
+    CatalogoProductosContext[U, OHS]->[D] GestionOrdenesContext
+    
+}
+BoundedContext GestionOrdenesContext{
+}
+BoundedContext GestionEnviosContext{
+}
+BoundedContext GestionClientesContext{
+}
+BoundedContext GestionPagosContext{
+}
+BoundedContext GestionAutorizacionAutenticacionContext{
+}
+BoundedContext CatalogoProductosContext{
+}
